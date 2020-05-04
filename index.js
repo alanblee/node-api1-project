@@ -6,6 +6,12 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+//config routes
+const userRoutes = require("./api/routes/userRoutes");
+
+//use routes
+app.use("/api/users", userRoutes);
+
 //port config
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
