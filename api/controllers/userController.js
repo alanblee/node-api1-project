@@ -29,11 +29,26 @@ module.exports.newUser = (req, res) => {
 
 //get user
 module.exports.getUser = (req, res) => {
-  if (!userData) {
+  if (!users.userData) {
     res
       .status(500)
       .json({ errorMessage: "The users information could not be retrieved." });
   } else {
-    res.status(200).json(userData);
+    res.status(200).json(users.userData);
+  }
+};
+
+//get single user by id
+module.exports.getSingleUser = (req, res) => {
+  const userId = req.params.userId;
+  const foundUser = users.userData.filter((user) => {
+    return user.id === userId;
+  });
+  if (foundUser.length > 0) {
+    res.status(200).json(foundUser[0]);
+  } else {
+    res
+      .status(404)
+      .json({ message: "The user with the specified ID does not exist." });
   }
 };
