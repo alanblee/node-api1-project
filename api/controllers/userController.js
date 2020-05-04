@@ -111,3 +111,29 @@ module.exports.editUser = (req, res) => {
       .json({ message: "The user with the specified ID does not exist." });
   }
 };
+
+module.exports.deleteUser = (req, res) => {
+  const userId = req.params.userId;
+
+  //check to see if theres a db first
+  if (!users.userData) {
+    res
+      .status(500)
+      .json({ errorMessage: "The user information could not be retrieved." });
+  }
+  //find the user
+  const foundUser = users.userData.filter((user) => {
+    return user.id === userId;
+  });
+
+  if (foundUser.length > 0) {
+    users.userData = users.userData.filter((user) => {
+      return user.id !== foundUser[0].id;
+    });
+    res.status(200).json(users.userData);
+  } else {
+    res
+      .status(404)
+      .json({ message: "The user with the specified ID does not exist." });
+  }
+};

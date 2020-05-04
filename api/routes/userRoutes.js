@@ -10,6 +10,11 @@ router.route("/").get(user.getUser);
 
 //GET user by id
 router.route("/:userId").get(user.getSingleUser);
+
 //PUT edit user by id
 router.route("/:userId").put(user.editUser);
+
+//DELETE user
+router.route("/:userId").delete(user.deleteUser);
+
 module.exports = router;
