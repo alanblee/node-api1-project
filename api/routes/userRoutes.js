@@ -10,5 +10,6 @@ router.route("/").get(user.getUser);
 
 //GET user by id
 router.route("/:userId").get(user.getSingleUser);
-
+//PUT edit user by id
+router.route("/:userId").put(user.editUser);
 module.exports = router;
